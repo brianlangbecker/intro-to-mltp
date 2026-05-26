@@ -28,7 +28,7 @@ services:
 
   # The Grafana dashboarding server.
   grafana:
-    image: grafana/grafana:12.3.1
+    image: grafana/grafana:13.0.1-security-01
     volumes:
       - "./grafana/definitions:/var/lib/grafana/dashboards"
       - "./grafana/provisioning:/etc/grafana/provisioning"
@@ -169,7 +169,7 @@ services:
   # The Tempo service stores traces send to it by Grafana Alloy, and takes
   # queries from Grafana to visualise those traces.
   tempo:
-    image: grafana/tempo:2.9.0
+    image: grafana/tempo:2.10.5
     ports:
       - "3200:3200"
       - "9411:9411"
@@ -191,7 +191,7 @@ services:
       - "./loki/loki.yaml:/etc/loki/loki.yaml"
 
   mimir:
-    image: grafana/mimir:2.17.4
+    image: grafana/mimir:3.0.6
     command: ["-ingester.native-histograms-ingestion-enabled=true", "-config.file=/etc/mimir.yaml"]
     ports:
       - "9009:9009"
@@ -199,7 +199,7 @@ services:
       - "./mimir/mimir.yaml:/etc/mimir.yaml"
 
   pyroscope:
-    image: grafana/pyroscope:1.16.2
+    image: grafana/pyroscope:2.0.2
     ports:
       - "4040:4040"
     command: ["server"]
